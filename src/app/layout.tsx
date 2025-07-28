@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "ARONA",
   description: "ARONA Official Website",
+  icons: {
+    icon: "favicon.ico",
+  },
 };
 
 export default function RootLayout({
