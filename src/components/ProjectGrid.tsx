@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import type { Updates } from '../../src/generated/prisma'; // A bit of a misnomer, but we need the type structure. Let's assume a project has a similar structure for now.
 
 // Let's define a proper type for a project to avoid confusion.
 interface Repo {

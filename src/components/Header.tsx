@@ -2,7 +2,11 @@
 
 import Link from 'next/link';
 
-const Header = () => {
+interface HeaderProps {
+  mainPageLinks?: boolean;
+}
+
+const Header = ({ mainPageLinks = false }: HeaderProps) => {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
 
@@ -36,11 +40,23 @@ const Header = () => {
         </h1>
         <nav>
           <ul>
-            <li><a href="#" onClick={(e) => handleScroll(e, 'home')}>Home</a></li>
-            <li><a href="#about" onClick={(e) => handleScroll(e, 'about')}>About</a></li>
-            <li><a href="#projects" onClick={(e) => handleScroll(e, 'projects')}>Projects</a></li>
-            <li><a href="#updates" onClick={(e) => handleScroll(e, 'updates')}>Updates</a></li>
-            <li><a href="#contact" onClick={(e) => handleScroll(e, 'contact')}>Contact</a></li>
+            {mainPageLinks ? (
+              <>
+                <li><Link href="/#home">Home</Link></li>
+                <li><Link href="/#about">About</Link></li>
+                <li><Link href="/#projects">Projects</Link></li>
+                <li><Link href="/#updates">Updates</Link></li>
+                <li><Link href="/#contact">Contact</Link></li>
+              </>
+            ) : (
+              <>
+                <li><a href="#" onClick={(e) => handleScroll(e, 'home')}>Home</a></li>
+                <li><a href="#about" onClick={(e) => handleScroll(e, 'about')}>About</a></li>
+                <li><a href="#projects" onClick={(e) => handleScroll(e, 'projects')}>Projects</a></li>
+                <li><a href="#updates" onClick={(e) => handleScroll(e, 'updates')}>Updates</a></li>
+                <li><a href="#contact" onClick={(e) => handleScroll(e, 'contact')}>Contact</a></li>
+              </>
+            )}
           </ul>
         </nav>
       </div>
