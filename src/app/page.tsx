@@ -1,6 +1,7 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import UpdatesSection from '../components/UpdatesSection';
+import ProjectGrid from '../components/ProjectGrid';
 import { prisma } from '../lib/prisma';
 import type { Updates } from '../../src/generated/prisma';
 
@@ -78,16 +79,7 @@ export default async function Home() {
 
           <section id="projects">
             <h2>PROJECTS</h2>
-            <div className="project-grid">
-              {projects.map((repo) => (
-                <a key={repo.id} href={repo.html_url} target="_blank" rel="noopener noreferrer" className="project-link">
-                  <div className="project-card">
-                    <h3>{repo.name}</h3>
-                    <p>{repo.description || 'No description provided.'}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
+            <ProjectGrid projects={projects} />
             <div className="more-button-container">
               <a href="https://github.com/orgs/AR-ONA/repositories" target="_blank" rel="noopener noreferrer" className="more-button">
                 + More

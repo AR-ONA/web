@@ -76,6 +76,13 @@ nav a:hover {
   color: var(--primary-blue);
 }
 
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  header nav {
+    display: none;
+  }
+}
+
 /* Hero Section */
 .hero {
   position: relative;
