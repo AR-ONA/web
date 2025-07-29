@@ -5,6 +5,8 @@ import Footer from '../../../components/Footer';
 import ClientFormattedDateTime from '../../../components/ClientFormattedDateTime';
 import { getAllUpdateTitles, getUpdateDetails } from '../../actions';
 
+export const dynamic = 'force-dynamic';
+
 export default async function UpdateDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const id = parseInt((await params).id, 10);
   if (isNaN(id)) {

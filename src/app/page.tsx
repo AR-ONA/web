@@ -2,6 +2,8 @@ import { prisma } from '../lib/prisma';
 import type { Updates, About } from '.prisma/client';
 import HomePageView from '../components/HomePageView';
 
+export const dynamic = 'force-dynamic';
+
 interface Repo {
   id: number;
   name: string;
