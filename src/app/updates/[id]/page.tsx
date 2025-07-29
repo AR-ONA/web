@@ -1,37 +1,14 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { prisma } from '../../../lib/prisma';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import { formatDateTime } from '../../../lib/utils';
+import { getAllUpdateTitles, getUpdateDetails } from '../../actions';
 
 interface UpdateDetailPageProps {
   params: {
     id: string;
   };
-}
-
-// Fetch a single update by ID
-async function getUpdate(id: number) {
-  try {
-    return await prisma.updates.findUnique({ where: { id } });
-  } catch (error) {
-    console.error(`Error fetching update with id ${id}:`, error);
-    return null;
-  }
-}
-
-// Fetch all updates, sorted by date
-async function getAllUpdates() {
-  try {
-    return await prisma.updates.findMany({
-      orderBy: { datetime: 'desc' },
-      select: { id: true, title: true }, // Select only necessary fields for the list
-    });
-  } catch (error) {
-    console.error('Error fetching all updates:', error);
-    return [];
-  }
 }
 
 export default async function UpdateDetailPage({ params }: UpdateDetailPageProps) {
@@ -42,8 +19,8 @@ export default async function UpdateDetailPage({ params }: UpdateDetailPageProps
 
   // Fetch current update and the list of all updates in parallel
   const [update, allUpdates] = await Promise.all([
-    getUpdate(id),
-    getAllUpdates(),
+    getUpdateDetails(id),
+    getAllUpdateTitles(),
   ]);
 
   if (!update) {

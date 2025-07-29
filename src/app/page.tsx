@@ -28,6 +28,7 @@ async function getProjects(): Promise<Repo[]> {
 async function getUpdates(): Promise<Updates[]> {
   try {
     return await prisma.updates.findMany({
+      where: { public: true },
       orderBy: { datetime: 'desc' },
       take: 10,
     });

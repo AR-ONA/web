@@ -19,21 +19,25 @@ export default function UpdateDetailPanel({ updateId, onClose }: UpdateDetailPan
   const router = useRouter();
 
   useEffect(() => {
-    // Start data fetching
     startTransition(async () => {
       const [updateData, allUpdatesData] = await Promise.all([
         getUpdateDetails(updateId),
         getAllUpdateTitles(),
       ]);
+
+      if (!updateData) {
+        onClose(); // Close the panel if update is not found or not public
+        return;
+      }
+
       setUpdate(updateData);
       setAllUpdates(allUpdatesData);
     });
 
-    // Animate panel in after a short delay
     const timer = setTimeout(() => setIsPanelVisible(true), 10);
 
     return () => clearTimeout(timer);
-  }, [updateId]);
+  }, [updateId, onClose]);
 
   const handleClose = () => {
     setIsPanelVisible(false);
