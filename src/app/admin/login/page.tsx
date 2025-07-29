@@ -1,8 +1,6 @@
 // src/app/admin/login/page.tsx
 import { login } from '../../actions';
 
-export const dynamic = 'force-dynamic';
-
 export default function LoginPage() {
   return (
     <div style={{
