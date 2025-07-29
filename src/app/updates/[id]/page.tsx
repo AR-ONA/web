@@ -5,14 +5,8 @@ import Footer from '../../../components/Footer';
 import { formatDateTime } from '../../../lib/utils';
 import { getAllUpdateTitles, getUpdateDetails } from '../../actions';
 
-interface UpdateDetailPageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function UpdateDetailPage({ params }: UpdateDetailPageProps) {
-  const id = parseInt(params.id, 10);
+export default async function UpdateDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const id = parseInt((await params).id, 10);
   if (isNaN(id)) {
     notFound();
   }

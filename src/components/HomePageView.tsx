@@ -6,7 +6,7 @@ import Footer from './Footer';
 import ProjectGrid from './ProjectGrid';
 import UpdatesSection from './UpdatesSection';
 import UpdateDetailPanel from './UpdateDetailPanel';
-import type { Updates } from '../../src/generated/prisma';
+import type { Updates } from '.prisma/client';
 
 interface Repo {
   id: number;

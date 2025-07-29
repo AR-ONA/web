@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import type { Updates } from '../../src/generated/prisma';
+import type { Updates } from '.prisma/client';
 import { formatDate } from '../lib/utils';
 
 interface UpdatesSectionProps {

@@ -3,7 +3,7 @@
 import { useEffect, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { formatDate } from '../lib/utils';
-import type { Updates } from '../../src/generated/prisma';
+import type { Updates } from '.prisma/client';
 import { getAllUpdateTitles, getUpdateDetails } from '../app/actions';
 
 interface UpdateDetailPanelProps {

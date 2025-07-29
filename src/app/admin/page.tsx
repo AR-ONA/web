@@ -9,7 +9,7 @@ import {
   deleteUpdate,
   updateUpdate
 } from '../actions';
-import type { Updates } from '../../generated/prisma';
+import type { Updates } from '.prisma/client';
 
 export default async function AdminPage() {
   const session = await getSession();
@@ -50,7 +50,7 @@ export default async function AdminPage() {
 
       {/* About Section Form */}
       <section>
-        <h2 style={h2Style}>Manage "About" Section</h2>
+        <h2 style={h2Style}>Manage About Section</h2>
         <form action={updateAbout} style={formStyle}>
           <textarea
             name="content"
@@ -64,7 +64,7 @@ export default async function AdminPage() {
 
       {/* Updates Section */}
       <section>
-        <h2 style={h2Style}>Manage "Updates"</h2>
+        <h2 style={h2Style}>Manage Updates</h2>
 
         {/* Create New Update Form */}
         <details style={{ marginTop: '1rem' }}>

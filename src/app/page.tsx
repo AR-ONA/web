@@ -1,5 +1,5 @@
 import { prisma } from '../lib/prisma';
-import type { Updates, About } from '../../src/generated/prisma';
+import type { Updates, About } from '.prisma/client';
 import HomePageView from '../components/HomePageView';
 
 interface Repo {

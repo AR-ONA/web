@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
 import { prisma } from '../lib/prisma';
-import type { About, Updates } from '../generated/prisma';
+import type { About, Updates } from '.prisma/client';
 
 // --- Original Actions ---
 
@@ -35,6 +35,19 @@ export async function getAllUpdateTitles(): Promise<{ id: number; title: string 
     }
 }
 
+export async function getAllUpdateIds(): Promise<{ id: number }[]> {
+    try {
+        const updates = await prisma.updates.findMany({
+            where: { public: true },
+            select: { id: true },
+        });
+        return updates;
+    } catch (error) {
+        console.error('Error fetching update ids:', error);
+        return [];
+    }
+}
+
 
 // --- Admin Actions ---
 
@@ -48,8 +61,8 @@ if (!sessionPassword || sessionPassword.length < 32) {
 }
 
 export async function getSession() {
-  const session = await getIronSession<SessionData>(cookies(), {
-    password: sessionPassword,
+  const session = await getIronSession<SessionData>(await cookies(), {
+    password: sessionPassword || '',
     cookieName: 'arona-admin-session',
     cookieOptions: {
       secure: process.env.NODE_ENV === 'production',
