@@ -1,5 +1,5 @@
 import { prisma } from '../lib/prisma';
-import type { Updates } from '../../src/generated/prisma';
+import type { Updates, About } from '../../src/generated/prisma';
 import HomePageView from '../components/HomePageView';
 
 interface Repo {
@@ -37,10 +37,20 @@ async function getUpdates(): Promise<Updates[]> {
   }
 }
 
+async function getAbout(): Promise<About | null> {
+  try {
+    return await prisma.about.findFirst();
+  } catch (error) {
+    console.error('Error fetching about content:', error);
+    return null;
+  }
+}
+
 export default async function Home() {
   const projects = await getProjects();
   const updates = await getUpdates();
+  const about = await getAbout();
 
-  return <HomePageView projects={projects} updates={updates} />;
+  return <HomePageView projects={projects} updates={updates} aboutContent={about?.content || ''} />;
 }
 

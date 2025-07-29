@@ -18,9 +18,10 @@ interface Repo {
 interface HomePageViewProps {
   projects: Repo[];
   updates: Updates[];
+  aboutContent: string;
 }
 
-export default function HomePageView({ projects, updates }: HomePageViewProps) {
+export default function HomePageView({ projects, updates, aboutContent }: HomePageViewProps) {
   const [selectedUpdateId, setSelectedUpdateId] = useState<number | null>(null);
 
   useEffect(() => {
@@ -65,13 +66,9 @@ export default function HomePageView({ projects, updates }: HomePageViewProps) {
         <div className="container">
           <section id="about">
             <h2>ABOUT</h2>
-            <p style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto' }}>
-              "All Roads, One New Answer"
-              <br/><br/>
-              We are a developer club trying to explore most of the development fields,<br/>such as the front-end and the back-end.
-              <br/><br/>
-              Isn't it cool?
-            </p>
+            <p style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto' }}
+               dangerouslySetInnerHTML={{ __html: aboutContent.replace(/\n/g, '<br/>') }}
+            />
           </section>
 
           <section id="projects">

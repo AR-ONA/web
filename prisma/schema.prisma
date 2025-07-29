@@ -21,3 +21,8 @@ model Updates {
   public Boolean  @default(false)
   datetime  String
 }
+
+model About {
+  id      Int     @id @default(autoincrement())
+  content String
+}
