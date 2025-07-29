@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
-import { formatDateTime } from '../../../lib/utils';
+import ClientFormattedDateTime from '../../../components/ClientFormattedDateTime';
 import { getAllUpdateTitles, getUpdateDetails } from '../../actions';
 
 export default async function UpdateDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -41,8 +41,8 @@ export default async function UpdateDetailPage({ params }: { params: Promise<{ i
           <section className="update-detail-content">
             <h1>{update.title}</h1>
             <p className="update-meta">
-              Posted on {formatDateTime(update.datetime)}
-            </p>
+                Posted on <ClientFormattedDateTime timestamp={update.datetime} />
+              </p>
             <div className="update-body" dangerouslySetInnerHTML={{ __html: update.content || '' }} />
           </section>
         </main>

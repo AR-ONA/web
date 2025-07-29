@@ -138,7 +138,7 @@ export async function createUpdate(formData: FormData) {
             title,
             content,
             public: isPublic,
-            datetime: new Date().toISOString(),
+            datetime: Math.floor(Date.now() / 1000).toString(),
         },
     });
     revalidatePath('/');

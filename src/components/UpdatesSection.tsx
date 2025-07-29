@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Updates } from '.prisma/client';
 import { formatDate } from '../lib/utils';
 
@@ -10,6 +10,12 @@ interface UpdatesSectionProps {
 
 const UpdatesSection = ({ updates }: UpdatesSectionProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [clientTimeZone, setClientTimeZone] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    setClientTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  }, []);
+
   const itemsToShow = isExpanded ? updates : updates.slice(0, 4);
 
   const toggleExpansion = () => {
@@ -23,10 +29,10 @@ const UpdatesSection = ({ updates }: UpdatesSectionProps) => {
         {itemsToShow.length > 0 ? (
           itemsToShow.map((item) => (
             <li key={item.id}>
-              <strong>{formatDate(item.datetime)}</strong>
+              <strong>{clientTimeZone ? formatDate(item.datetime, clientTimeZone) : '...'}</strong>
               <a href={`#update-${item.id}`} className="update-title-link">
-  <span>{item.title}</span>
-</a>
+                <span>{item.title}</span>
+              </a>
             </li>
           ))
         ) : (

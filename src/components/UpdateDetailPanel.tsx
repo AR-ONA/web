@@ -16,7 +16,12 @@ export default function UpdateDetailPanel({ updateId, onClose }: UpdateDetailPan
   const [allUpdates, setAllUpdates] = useState<{ id: number; title: string }[]>([]);
   const [isPending, startTransition] = useTransition();
   const [isPanelVisible, setIsPanelVisible] = useState(false);
+  const [clientTimeZone, setClientTimeZone] = useState<string | undefined>(undefined);
   const router = useRouter();
+
+  useEffect(() => {
+    setClientTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  }, []);
 
   useEffect(() => {
     startTransition(async () => {
@@ -89,7 +94,7 @@ export default function UpdateDetailPanel({ updateId, onClose }: UpdateDetailPan
               <div className="update-detail-panel-body">
                 <h1>{update.title}</h1>
                 <p className="update-meta">
-                  Posted on {formatDate(update.datetime)}
+                  Posted on {clientTimeZone ? formatDate(update.datetime, clientTimeZone) : '...'}
                 </p>
                 <div className="update-body" dangerouslySetInnerHTML={{ __html: update.content || '' }} />
               </div>
