@@ -1,6 +1,8 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import UpdatesSection from '../components/UpdatesSection';
+import { prisma } from '../lib/prisma';
+import type { Updates } from '../../src/generated/prisma';
 
 // --- GitHub Repo Data Fetching ---
 interface Repo {
@@ -12,7 +14,7 @@ interface Repo {
 
 async function getProjects(): Promise<Repo[]> {
   try {
-    const res = await fetch('https://api.github.com/users/AR-ONA/repos?sort=updated&per_page=6', {
+    const res = await fetch('https://api.github.com/users/Ren-deRing/repos?sort=updated&per_page=6', {
       next: { revalidate: 3600 } // Revalidate every hour
     });
 
@@ -28,8 +30,26 @@ async function getProjects(): Promise<Repo[]> {
   }
 }
 
+// --- Updates Data Fetching ---
+async function getUpdates(): Promise<Updates[]> {
+  try {
+    const updates = await prisma.updates.findMany({
+      orderBy: {
+        datetime: 'desc',
+      },
+      take: 10, // 10개 가져오기
+    });
+    return updates;
+  } catch (error) {
+    console.error('Error fetching updates:', error);
+    return [];
+  }
+}
+
+
 export default async function Home() {
   const projects = await getProjects();
+  const updates = await getUpdates();
 
   return (
     <>
@@ -69,13 +89,13 @@ export default async function Home() {
               ))}
             </div>
             <div className="more-button-container">
-              <a href="https://github.com/AR-ONA?tab=repositories" target="_blank" rel="noopener noreferrer" className="more-button">
+              <a href="https://github.com/orgs/AR-ONA/repositories" target="_blank" rel="noopener noreferrer" className="more-button">
                 + More
               </a>
             </div>
           </section>
 
-          <UpdatesSection />
+          <UpdatesSection updates={updates} />
 
           <section id="contact" className="contact">
             <h2>CONTACT</h2>

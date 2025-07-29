@@ -228,6 +228,11 @@ section h2::after {
     font-weight: 600;
 }
 
+.update-title-link {
+  color: var(--dark-gray);
+  text-decoration: none;
+}
+
 .updates-toggle {
   text-align: center;
   color: var(--medium-gray);
