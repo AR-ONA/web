@@ -376,10 +376,22 @@ section h2::after {
 /* Footer */
 footer {
   text-align: center;
-  padding: 30px 0;
+  padding: 20px 0;
+  line-height: 20px;
   border-top: 1px solid var(--light-gray);
   color: var(--medium-gray);
   margin-top: 40px;
+}
+
+footer a {
+  color: var(--medium-gray);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+footer a:hover {
+  /* color: var(--primary-blue); */
+  text-decoration: underline;
 }
 
 /* Update Detail Slide-in Panel */
