@@ -85,7 +85,7 @@ export default function HomePageView({ projects, updates, aboutContent }: HomePa
 
           <section id="contact" className="contact">
             <h2>CONTACT</h2>
-            <p>We are students, so we're so free to check and respond.<br/>Feel free to reach out to us!</p>
+            <p>We are students, so free to check and respond.<br/>Feel free to reach out to us!</p>
             <a href="mailto:arona.devs@gmail.com" className="cta-button">Email Us</a>
           </section>
         </div>
